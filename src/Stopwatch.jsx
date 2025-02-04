@@ -13,7 +13,9 @@ const Stopwatch = () => {
         setElapsedTime(Date.now() - startTimeRef.current);
       }, 10);
     }
-    return () => {clearInterval(intervalIdRef.current)};
+    return () => {
+      clearInterval(intervalIdRef.current);
+    };
   }, [isRunning]);
 
   function start() {
@@ -28,12 +30,22 @@ const Stopwatch = () => {
     setIsRunning(false);
   }
   function formatTime() {
-    return "00:00:00";
+    let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+    let seconds = Math.floor((elapsedTime / 1000) % 60);
+    let milliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+    milliseconds = String(milliseconds).padStart(2, "0");
+
+    return `${minutes}:${seconds}:${milliseconds}`;
   }
   return (
     <>
-      <div className="flex flex-col align-items-center border-[5px] border-solid border-black rounded-[50px] bg-white p-[50px]">
-        <div className="text-[80px] font-mono font-bold text-gray-800 [text-shadow:2px_2px_2px_hsla(0,0%,0%,0.75)] mb-[25px]">
+      <div className="flex flex-col align-items-center mt-28 border-[5px] border-solid border-black rounded-[50px] bg-white p-[50px]">
+        <div className="text-[80px] text-center font-mono font-bold text-gray-800 [text-shadow:2px_2px_2px_hsla(0,0%,0%,0.75)] mb-[25px]">
           {formatTime()}
         </div>
         {/* Button */}
