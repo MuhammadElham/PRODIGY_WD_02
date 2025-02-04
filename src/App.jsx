@@ -1,10 +1,9 @@
 import React from 'react'
+import Stopwatch from './Stopwatch'
 
 const App = () => {
   return (
-    <div className='bg-red-700 text-white text-9xl font-bold py-16 text-center'>
-      My App
-    </div>
+   <Stopwatch/>
   )
 }
 
